@@ -1,4 +1,3 @@
-from io import FileIO
 import os
 
 from discord.ext.commands.core import command
