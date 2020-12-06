@@ -1,6 +1,6 @@
 import os
 
-from discord.ext.commands.core import command
+from discord.ext import commands
 import psutil
 
 from dotenv import load_dotenv
