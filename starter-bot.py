@@ -37,8 +37,8 @@ def remove_op(discriminator):
     op_list = ops()
     op_list.remove(discriminator)
     file = open("ops", "w")
-    file.writelines(op_list)
-    file.write("\n")
+    for op in op_list:
+        file.write(op + "\n")
     file.close()
 
 async def check_op(ctx):
