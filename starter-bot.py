@@ -9,7 +9,8 @@ from asyncio import sleep
 load_dotenv()
 token = os.getenv("TOKEN")
 execution_command = os.getenv("EXEC-COMMAND")
-process_name = os.getenv("PROCESS-NAME")
+pre_stop_command = os.getenv("PRE-STOP")
+stop_command = os.getenv("STOP-COMMAND")
 
 def exec():
     if not process_name in (p.name() for p in psutil.process_iter()):
@@ -18,9 +19,11 @@ def exec():
         return 100
 
 def stop():
-    for p in psutil.process_iter():
-        if p.name() == process_name:
-            p.kill()
+    return_code = os.system("\"{}\"".format(pre_stop_command))
+    if not return_code:
+        return os.system("\"{}\"".format(stop_command))
+    else:
+        return return_code
 
 def add_op(discriminator):
     file = open("ops", "a")
@@ -76,8 +79,10 @@ async def deop(ctx, discriminator):
 @bot.command()
 async def restart(ctx):
     if await check_op(ctx):
-        stop()
-        await ctx.send("Stopped process!")
-        await start(ctx)
+        if not stop():
+            await ctx.send("Stopped server!")
+            await start(ctx)
+        else:
+            await ctx.send("Could not stop server!")
 
 bot.run(token)
