@@ -62,7 +62,7 @@ async def start(ctx):
     elif result == 100 :
         await ctx.send("Already running!")
     else:
-        await ctx.send("Start was not successfull!")
+        await ctx.send("Start was not successfull! Return: {}".format(result))
 
 @bot.command()
 async def op(ctx, discriminator):
