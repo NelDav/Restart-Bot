@@ -13,10 +13,7 @@ pre_stop_command = os.getenv("PRE-STOP")
 stop_command = os.getenv("STOP-COMMAND")
 
 def exec():
-    if not process_name in (p.name() for p in psutil.process_iter()):
-        return os.system("\"{}\"".format(execution_command))
-    else:
-        return 100
+    return os.system("\"{}\"".format(execution_command))
 
 def stop():
     return_code = os.system("\"{}\"".format(pre_stop_command))
