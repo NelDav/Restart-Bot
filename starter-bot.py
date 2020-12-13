@@ -13,12 +13,13 @@ pre_stop_command = os.getenv("PRE-STOP")
 stop_command = os.getenv("STOP-COMMAND")
 
 def exec():
-    return os.system("\"{}\"".format(execution_command))
+    print("{}".format(execution_command))
+    return os.system("{}".format(execution_command))
 
 def stop():
-    return_code = os.system("\"{}\"".format(pre_stop_command))
+    return_code = os.system("{}".format(pre_stop_command))
     if not return_code:
-        return os.system("\"{}\"".format(stop_command))
+        return os.system("{}".format(stop_command))
     else:
         return return_code
 
