@@ -11,8 +11,10 @@ token = os.getenv("TOKEN")
 execution_command = os.getenv("EXEC-COMMAND")
 pre_stop_command = os.getenv("PRE-STOP")
 stop_command = os.getenv("STOP-COMMAND")
+exec_path = os.getenv("EXEC-PATH")
 
 def exec():
+    os.chdir(exec_path)
     return os.system("\"{}\"".format(execution_command))
 
 def stop():
